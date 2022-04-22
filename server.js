@@ -1,9 +1,13 @@
 const mongoose = require('mongoose')
 const express = require('express')
+
 const roomRouter = require('./routes/room')
 
 const app = express()
+
 app.use('/rooms', roomRouter)
+
+app.use(express.json())
 
 const dotenv = require('dotenv')
 dotenv.config({ path: './config.env' })
