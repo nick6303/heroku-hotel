@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
+    console.log(req)
     const data = req.body
     const newRoom = await Room.create({
       name: data.name,
