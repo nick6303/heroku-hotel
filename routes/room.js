@@ -11,9 +11,17 @@ router.get('/', async (req, res) => {
   })
 })
 
+router.get('/:id', async (req, res) => {
+  const id = req.params.id
+  const room = await Room.findOne({ _id: id })
+  res.status(200).json({
+    ststus: 'sccess',
+    room,
+  })
+})
+
 router.post('/', async (req, res) => {
   try {
-    console.log(req)
     const data = req.body
     const newRoom = await Room.create({
       name: data.name,
@@ -60,6 +68,7 @@ router.patch('/:id', async (req, res) => {
   if (data) {
     try {
       const updateroom = await Room.findByIdAndUpdate(id, { $set: data })
+      Object.assign(updateroom, data)
       res.status(200).json({
         status: 'sccess',
         data: updateroom,
